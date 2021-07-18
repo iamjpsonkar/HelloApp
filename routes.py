@@ -1,9 +1,4 @@
-from flask import Flask
-from flask import redirect
-from flask import url_for
-from flask import render_template
-
-app=Flask(__name__)
+from HelloApp import *
 
 @app.route("/")
 def hello():
@@ -44,17 +39,14 @@ def user_msq_age(username,age=18):
 def demo_redirect():
     return redirect("http://localhost:5000/")
 
-@app.route("/greet/user/<uname>")
+@app.route("/greet/user/<uname>/")
 def greet_user(uname):
    #return redirect(url_for('hello', username=uname))
-   return render_template("index.html",title="User Page",user="Jay")
+   return render_template("index.html",title="User Page",user=uname)
 
 
 @app.route("/users/")
 def display_users():
     users=["Jay", "Faizan", "Praveen"]
     return render_template("users.html",title="Users Page",users=users)
-
-if __name__=='__main__':
-    app.run(debug=True)
 
