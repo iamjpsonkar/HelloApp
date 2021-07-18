@@ -1,9 +1,18 @@
-
 from flask import Flask
-from flask import redirect
-from flask import url_for
-from flask import render_template
 
-app=Flask(__name__)
+from .config import Config
 
-from HelloApp.routes import *
+from flask_sqlalchemy import SQLAlchemy
+
+from flask_migrate import Migrate
+
+app = Flask(__name__)
+
+app.config.from_object(Config)
+
+db = SQLAlchemy(app)
+
+migrate=Migrate(app, db)
+
+from HelloApp import routes
+
